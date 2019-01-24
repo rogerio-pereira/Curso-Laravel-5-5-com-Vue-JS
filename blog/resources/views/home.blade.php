@@ -9,9 +9,9 @@
 
                     <div class='row'>
                         <div class='col-md-4'>
-                            <painel titulo='Conteudo 1' cor='blue'>
+                            <caixa titulo='Conteudo 1' cor='blue'>
                                 Teste de conteúdo
-                            </painel>
+                            </caixa>
                         </div>
                         <div class='col-md-4'>
                             <painel titulo='Conteudo 2' cor='orange'>
