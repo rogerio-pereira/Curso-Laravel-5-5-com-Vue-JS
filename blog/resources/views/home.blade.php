@@ -7,7 +7,7 @@
 
             <div class='row'>
                 <div class='col-md-4'>
-                    <caixa qtd='80' titulo='Artigos' url='#' cor='orange' icone='ion ion-pie-graph'>
+                    <caixa qtd='80' titulo='Artigos' url='#teste' cor='orange' icone='ion ion-pie-graph'>
                         Teste de conteúdo
                     </caixa>
                 </div>
