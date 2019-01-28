@@ -9,6 +9,11 @@
                                 [1, 'PHP OO', 'Curso de PHP'],
                                 [2, 'VueJS', 'Curso de VueJS']
                             ]"
+                criar='#criar'
+                detalhe='#detalhe'
+                editar='#editar'
+                deletar='#deletar'
+                token='12456897452'
             ></tabela-lista>
         </painel>
     </pagina>
