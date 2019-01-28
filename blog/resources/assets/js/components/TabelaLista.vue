@@ -6,48 +6,12 @@
             <thead>
                 <tr>
                     <th v-for='titulo in titulos'>{{titulo}}</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Titulo</td>
-                    <td>Descrição</td>
-                    <td>Autor</td>
-                    <td>Data</td>
-                    <td>
-                        <a href='#'>Editar</a> | 
-                        <a href='#'>Deletar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Titulo</td>
-                    <td>Descrição</td>
-                    <td>Autor</td>
-                    <td>Data</td>
-                    <td>
-                        <a href='#'>Editar</a> | 
-                        <a href='#'>Deletar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Titulo</td>
-                    <td>Descrição</td>
-                    <td>Autor</td>
-                    <td>Data</td>
-                    <td>
-                        <a href='#'>Editar</a> | 
-                        <a href='#'>Deletar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Titulo</td>
-                    <td>Descrição</td>
-                    <td>Autor</td>
-                    <td>Data</td>
+                <tr v-for='item in items'>
+                    <td v-for='i in item'>{{i}}</td>
                     <td>
                         <a href='#'>Editar</a> | 
                         <a href='#'>Deletar</a>
@@ -61,7 +25,8 @@
 <script>
     export default {
         props:[
-            'titulos'
+            'titulos',
+            'items'
         ]
     }
 </script>
