@@ -9,6 +9,8 @@
                                 [1, 'PHP OO', 'Curso de PHP'],
                                 [2, 'VueJS', 'Curso de VueJS']
                             ]"
+                ordem='desc'
+                ordemCol=1
                 criar='#criar'
                 detalhe='#detalhe'
                 editar='#editar'
