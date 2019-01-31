@@ -44373,13 +44373,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         lista: function lista() {
-            var busca = 'php';
+            var _this = this;
 
             return this.items.filter(function (res) {
-                return true;
+                for (var k = 0; k < res.length; k++) {
+                    if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
+                        return true;
+                    }
+                }
+
+                return false;
             });
 
-            return this.items;
+            return true;
         }
     }
 });
@@ -44419,8 +44425,7 @@ var render = function() {
               _vm.buscar = $event.target.value
             }
           }
-        }),
-        _vm._v(_vm._s(_vm.buscar) + "\n        ")
+        })
       ])
     ]),
     _vm._v(" "),
