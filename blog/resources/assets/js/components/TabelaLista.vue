@@ -1,6 +1,12 @@
 <template>
     <div>
-        <a v-if='criar' v-bind:href='criar'>Criar</a>
+        <div class='form-inline'>
+            <a v-if='criar' v-bind:href='criar'>Criar</a>
+
+            <div class='form-group pull-right'>
+                <input type='search' class='form-control' placeholder='Buscar' v-model='buscar'>{{buscar}}
+            </div>
+        </div>
 
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -10,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for='(item, index) in items'>
+                <tr v-for='(item, index) in lista'>
                     <td v-for='i in item'>{{i}}</td>
                     <td v-id='detalhe || editar || deletar'>
                         <form v-bind:id='index' v-if='deletar && token' v-bind:action='deletar' method=post>
@@ -48,11 +54,27 @@
             'detalhe',
             'editar',
             'deletar',
-            'token',
+            'token'
         ],
+        data:function(){
+            return {
+                buscar:''
+            }
+        },
         methods:{
             executaForm:function(index){
                 document.getElementById(index).submit();
+            }
+        },
+        computed:{
+            lista:function(){
+                let busca = 'php';
+
+                return this.items.filter(res => {
+                    return true;
+                });
+
+                return this.items;
             }
         }
     }
