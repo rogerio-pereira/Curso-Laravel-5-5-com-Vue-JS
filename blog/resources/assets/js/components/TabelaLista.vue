@@ -11,7 +11,7 @@
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
-                    <th v-for='titulo in titulos'>{{titulo}}</th>
+                    <th style='cursor:pointer;' v-on:click='ordenaColuna(index)' v-for='(titulo, index) in titulos'>{{titulo}}</th>
                     <th v-id='detalhe || editar || deletar'>Ações</th>
                 </tr>
             </thead>
@@ -66,11 +66,19 @@
         methods:{
             executaForm:function(index){
                 document.getElementById(index).submit();
+            },
+            ordenaColuna:function(coluna){
+                this.ordemCol = coluna;
+
+                if(this.ordem.toLowerCase() == 'asc')
+                    this.ordem = 'desc';
+                else
+                    this.ordem = 'asc';
             }
         },
         computed:{
             lista:function(){
-                let ordem = this.ordem || "ASC";
+                let ordem = this.ordem || "asc";
                 let ordemCol = this.ordemCol || 0;
 
                 ordem = ordem.toLowerCase();
