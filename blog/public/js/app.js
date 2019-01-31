@@ -44375,6 +44375,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lista: function lista() {
             var _this = this;
 
+            this.items.sort(function (a, b) {
+                if (a[1] > b[1]) return 1;else if (a[1] < b[1]) return -1;else return 0;
+            });
+
             return this.items.filter(function (res) {
                 for (var k = 0; k < res.length; k++) {
                     if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {

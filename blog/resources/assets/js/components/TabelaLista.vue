@@ -68,6 +68,15 @@
         },
         computed:{
             lista:function(){
+                this.items.sort(function(a,b){
+                    if(a[1] > b[1])
+                        return 1;
+                    else if(a[1] < b[1])
+                        return -1;
+                    else
+                        return 0;
+                });
+
                 return this.items.filter(res => {
                     for(let k=0; k<res.length; k++) {
                         if((res[k]+'').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ){
