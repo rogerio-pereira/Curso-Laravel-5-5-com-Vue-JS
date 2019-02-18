@@ -44363,7 +44363,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['titulos', 'items', 'ordem', 'ordemCol', 'criar', 'detalhe', 'editar', 'deletar', 'token'],
     data: function data() {
         return {
-            buscar: ''
+            buscar: '',
+            ordemAux: this.ordem || 'asc',
+            ordemAuxCol: this.ordemCol || 0
         };
     },
     methods: {
@@ -44371,17 +44373,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.getElementById(index).submit();
         },
         ordenaColuna: function ordenaColuna(coluna) {
-            this.ordemCol = coluna;
+            this.ordemAuxCol = coluna;
 
-            if (this.ordem.toLowerCase() == 'asc') this.ordem = 'desc';else this.ordem = 'asc';
+            if (this.ordemAux.toLowerCase() == 'asc') this.ordemAux = 'desc';else this.ordemAux = 'asc';
         }
     },
     computed: {
         lista: function lista() {
             var _this = this;
 
-            var ordem = this.ordem || "asc";
-            var ordemCol = this.ordemCol || 0;
+            var ordem = this.ordemAux;
+            var ordemCol = this.ordemAuxCol;
 
             ordem = ordem.toLowerCase();
             ordemCol = parseInt(ordemCol);
@@ -44475,16 +44477,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                {
-                  directives: [
-                    {
-                      name: "id",
-                      rawName: "v-id",
-                      value: _vm.detalhe || _vm.editar || _vm.deletar,
-                      expression: "detalhe || editar || deletar"
-                    }
-                  ]
-                },
+                { attrs: { id: _vm.detalhe || _vm.editar || _vm.deletar } },
                 [_vm._v("Ações")]
               )
             ],
@@ -44504,16 +44497,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "td",
-                  {
-                    directives: [
-                      {
-                        name: "id",
-                        rawName: "v-id",
-                        value: _vm.detalhe || _vm.editar || _vm.deletar,
-                        expression: "detalhe || editar || deletar"
-                      }
-                    ]
-                  },
+                  { attrs: { id: _vm.detalhe || _vm.editar || _vm.deletar } },
                   [
                     _vm.deletar && _vm.token
                       ? _c(

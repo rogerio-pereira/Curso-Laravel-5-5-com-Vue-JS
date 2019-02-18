@@ -12,13 +12,13 @@
             <thead>
                 <tr>
                     <th style='cursor:pointer;' v-on:click='ordenaColuna(index)' v-for='(titulo, index) in titulos'>{{titulo}}</th>
-                    <th v-id='detalhe || editar || deletar'>Ações</th>
+                    <th v-bind:id='detalhe || editar || deletar'>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for='(item, index) in lista'>
                     <td v-for='i in item'>{{i}}</td>
-                    <td v-id='detalhe || editar || deletar'>
+                    <td v-bind:id='detalhe || editar || deletar'>
                         <form v-bind:id='index' v-if='deletar && token' v-bind:action='deletar' method=post>
                             <input type='hidden' name='_method' value='DELETE'>
                             <input type='hidden' name='_token' v-bind:value='token'>
@@ -60,7 +60,9 @@
         ],
         data:function(){
             return {
-                buscar:''
+                buscar:'',
+                ordemAux: this.ordem || 'asc',
+                ordemAuxCol: this.ordemCol || 0,
             }
         },
         methods:{
@@ -68,18 +70,18 @@
                 document.getElementById(index).submit();
             },
             ordenaColuna:function(coluna){
-                this.ordemCol = coluna;
+                this.ordemAuxCol = coluna;
 
-                if(this.ordem.toLowerCase() == 'asc')
-                    this.ordem = 'desc';
+                if(this.ordemAux.toLowerCase() == 'asc')
+                    this.ordemAux = 'desc';
                 else
-                    this.ordem = 'asc';
+                    this.ordemAux = 'asc';
             }
         },
         computed:{
             lista:function(){
-                let ordem = this.ordem || "asc";
-                let ordemCol = this.ordemCol || 0;
+                let ordem = this.ordemAux;
+                let ordemCol = this.ordemAuxCol;
 
                 ordem = ordem.toLowerCase();
                 ordemCol = parseInt(ordemCol);
