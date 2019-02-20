@@ -86,42 +86,38 @@
                 ordem = ordem.toLowerCase();
                 ordemCol = parseInt(ordemCol);
 
-                if(ordem == 'asc')
-                {
+                if(ordem == 'asc') {
                     this.items.sort(function(a,b){
-                        if(a[ordemCol] > b[ordemCol])
-                            return 1;
-                        else if(a[ordemCol] < b[ordemCol])
-                            return -1;
-                        else
-                            return 0;
+                        if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {return 1;}
+                        if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {return -1;}
+                            
+                        return 0;
                     });
                 }
-                else
-                {
+                else {
                     this.items.sort(function(a,b){
-                        if(a[ordemCol] < b[ordemCol])
-                            return 1;
-                        else if(a[ordemCol] > b[ordemCol])
-                            return -1;
-                        else
-                            return 0;
+                        if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {return 1;}
+                        if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {return -1;}
+                        
+                        return 0;
                     });
                 }
 
                 
-
-                return this.items.filter(res => {
-                    for(let k=0; k<res.length; k++) {
-                        if((res[k]+'').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ){
-                            return true;
+                if(this.buscar) {
+                    return this.items.filter(res => {
+                        for(let k=0; k<res.length; k++) {
+                            if((res[k]+'').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ){
+                                return true;
+                            }
                         }
-                    }
-                    
-                    return false;
-                });
+                        
+                        return false;
+                    });
+                }
+                
 
-                return true;
+                return this.items;
             }
         }
     }

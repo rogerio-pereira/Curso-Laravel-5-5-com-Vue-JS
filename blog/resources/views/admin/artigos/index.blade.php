@@ -9,10 +9,7 @@
 
             <tabela-lista 
                 v-bind:titulos="['#', 'Titulo', 'Descrição']"
-                v-bind:items="[
-                                [1, 'PHP OO', 'Curso de PHP'],
-                                [2, 'VueJS', 'Curso de VueJS']
-                            ]"
+                v-bind:items="{{$listaArtigos}}"
                 ordem='desc'
                 ordemCol=1
                 criar='#criar'

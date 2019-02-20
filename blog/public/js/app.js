@@ -44394,25 +44394,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (ordem == 'asc') {
                 this.items.sort(function (a, b) {
-                    if (a[ordemCol] > b[ordemCol]) return 1;else if (a[ordemCol] < b[ordemCol]) return -1;else return 0;
+                    if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
+                        return 1;
+                    }
+                    if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
+                        return -1;
+                    }
+
+                    return 0;
                 });
             } else {
                 this.items.sort(function (a, b) {
-                    if (a[ordemCol] < b[ordemCol]) return 1;else if (a[ordemCol] > b[ordemCol]) return -1;else return 0;
+                    if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
+                        return 1;
+                    }
+                    if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
+                        return -1;
+                    }
+
+                    return 0;
                 });
             }
 
-            return this.items.filter(function (res) {
-                for (var k = 0; k < res.length; k++) {
-                    if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
-                        return true;
+            if (this.buscar) {
+                return this.items.filter(function (res) {
+                    for (var k = 0; k < res.length; k++) {
+                        if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
+                            return true;
+                        }
                     }
-                }
 
-                return false;
-            });
+                    return false;
+                });
+            }
 
-            return true;
+            return this.items;
         }
     }
 });
