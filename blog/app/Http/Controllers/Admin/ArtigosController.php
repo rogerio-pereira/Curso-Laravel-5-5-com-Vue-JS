@@ -20,8 +20,8 @@ class ArtigosController extends Controller
         ]);
 
         $listaArtigos = json_encode([
-            ['id'=>1, 'titulo'=>'PHP OO', 'desricao'=>'Curso de PHP'],
-            ['id'=>2, 'titulo'=>'VueJS', 'desricao'=>'Curso de VueJS']
+            ['id'=>1, 'titulo'=>'PHP OO', 'descricao'=>'Curso de PHP'],
+            ['id'=>2, 'titulo'=>'VueJS', 'descricao'=>'Curso de VueJS']
         ]);  
         return view('admin.artigos.index', compact('listaMigalhas', 'listaArtigos'));
     }

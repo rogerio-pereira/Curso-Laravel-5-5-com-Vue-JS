@@ -1414,11 +1414,11 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */]);
 //VueX
 var store = new __WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */].Store({
     state: {
-        items: {}
+        item: {}
     },
     mutations: {
-        setItems: function setItems(state, obj) {
-            state.items = obj;
+        setItem: function setItem(state, obj) {
+            state.item = obj;
         }
     }
 });
@@ -44616,6 +44616,7 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar |",
@@ -44671,6 +44672,7 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar |",
@@ -44725,6 +44727,7 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
+                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar",
@@ -45042,9 +45045,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tipo', 'nome', 'titulo', 'css']
+    props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+    methods: {
+        preencheFormulario: function preencheFormulario() {
+            this.$store.commit('setItem', this.item);
+        }
+    }
 });
 
 /***/ }),
@@ -45056,49 +45070,117 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", [
-    !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
-      ? _c(
-          "button",
-          {
-            class: _vm.css || "btn btn-primary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
+    _vm.item
+      ? _c("span", [
+          !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "button"
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "link"
+            ? _c(
+                "a",
+                {
+                  class: _vm.css || "",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.preencheFormulario()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e()
+        ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.tipo == "button"
-      ? _c(
-          "button",
-          {
-            class: _vm.css || "btn btn-primary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.tipo == "link"
-      ? _c(
-          "a",
-          {
-            class: _vm.css || "",
-            attrs: {
-              href: "#",
-              "data-toggle": "modal",
-              "data-target": "#" + _vm.nome
-            }
-          },
-          [_vm._v(_vm._s(_vm.titulo))]
-        )
+    !_vm.item
+      ? _c("span", [
+          !_vm.tipo || (_vm.tipo != "button" && _vm.tipo != "link")
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "button"
+            ? _c(
+                "button",
+                {
+                  class: _vm.css || "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.tipo == "link"
+            ? _c(
+                "a",
+                {
+                  class: _vm.css || "",
+                  attrs: {
+                    href: "#",
+                    "data-toggle": "modal",
+                    "data-target": "#" + _vm.nome
+                  }
+                },
+                [_vm._v(_vm._s(_vm.titulo))]
+              )
+            : _vm._e()
+        ])
       : _vm._e()
   ])
 }
