@@ -6,7 +6,7 @@
             <migalhas v-bind:lista='{{$listaMigalhas}}'></migalhas>
 
             <tabela-lista 
-                v-bind:titulos="['#', 'Titulo', 'Descrição']"
+                v-bind:titulos="['#', 'Titulo', 'Descrição', 'Data']"
                 v-bind:items="{{$listaArtigos}}"
                 ordem='desc'
                 ordemCol=1
@@ -21,7 +21,7 @@
     </pagina>
 
     <modal nome='adicionar' titulo='Adicionar'>
-        <formulario id='formAdicionar' css='' action='#' method='put' enctype='multipart/form-data' token='{{ csrf_token() }}'>
+        <formulario id='formAdicionar' css='' action='{{route('artigos.store')}}' method='post' enctype='' token='{{ csrf_token() }}'>
             <div class="form-group">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" id='titulo' name='titulo' placeholder='Título'>
@@ -29,6 +29,14 @@
             <div class="form-group">
                 <label for="descricao">Descrição</label>
                 <input type="text" class="form-control" id='descricao' name='descricao' placeholder='Descrição'>
+            </div>
+            <div class="form-group">
+                <label for="conteudo">Conteúdo</label>
+                <textarea class="form-control" id='conteudo' name='conteudo'></textarea>
+            </div>
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="datetime-local" class="form-control" id='data' name='data'>
             </div>
         </formulario>
 
