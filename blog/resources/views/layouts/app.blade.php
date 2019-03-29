@@ -8,14 +8,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ env('APP_NAME', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <topo titulo="{{ config('app.name', 'Laravel') }}" url="{{ url('/') }}">
+        <topo titulo="{{ env('APP_NAME', 'Laravel') }}" url="{{ url('/') }}">
             <!-- Authentication Links -->
             @guest
                 <li><a href="{{ route('login') }}">Login</a></li>

@@ -53,19 +53,8 @@
         </painel>
     </modal>
     <modal nome='detalhe'>
-        <painel titulo='Detalhe'>
-            <formulario css='' action='#' method='put' enctype='multipart/form-data' token='{{ csrf_token() }}'>
-                <div class="form-group">
-                    <label for="titulo">Título</label>
-                    <input type="text" class="form-control" id='titulo' name='titulo' placeholder='Título'>
-                </div>
-                <div class="form-group">
-                    <label for="descricao">Descrição</label>
-                    <input type="text" class="form-control" id='descricao' name='descricao' placeholder='Descrição'>
-                </div>
-
-                <button class='btn btn-info'>Adicionar</button>
-            </formulario>
+        <painel v-bind:titulo='$store.state.item.titulo'>
+            <p>@{{$store.state.item.descricao}}</p>
         </painel>
     </modal>
 @endsection

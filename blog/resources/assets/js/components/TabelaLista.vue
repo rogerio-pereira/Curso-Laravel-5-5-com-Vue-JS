@@ -117,7 +117,6 @@
                     });
                 }
 
-                
                 if(this.buscar) {
                     return this.items.filter(res => {
                         for(let k=0; k<res.length; k++) {
@@ -130,7 +129,6 @@
                     });
                 }
                 
-
                 return this.items;
             }
         }
