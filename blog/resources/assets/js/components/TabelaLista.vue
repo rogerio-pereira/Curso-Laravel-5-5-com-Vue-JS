@@ -8,6 +8,7 @@
             <div class='form-group pull-right'>
                 <input type='search' class='form-control' placeholder='Buscar' v-model='buscar'>
             </div>
+            <br/><br/>
         </div>
 
         <table class="table table-bordered table-hover table-striped">
@@ -26,7 +27,7 @@
                             <input type='hidden' name='_token' v-bind:value='token'>
 
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
 
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar |</a>
                             <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar |' css=''></modallink>
@@ -36,7 +37,7 @@
 
                         <span v-if='!token'>
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
                             
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar |</a>
                             <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar |' css=''></modallink>
@@ -46,7 +47,7 @@
 
                         <span v-if='token && !deletar'>
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
                             
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar</a>
                             <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar' css=''></modallink>
@@ -119,6 +120,7 @@
 
                 if(this.buscar) {
                     return this.items.filter(res => {
+                        res = Object.values(res);
                         for(let k=0; k<res.length; k++) {
                             if((res[k]+'').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ){
                                 return true;
