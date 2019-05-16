@@ -21,6 +21,11 @@
                         Teste de conteúdo
                     </caixa>
                 </div>
+                <div class='col-md-4'>
+                    <caixa qtd='{{$totalAdmin}}' titulo='Administradores' url='{{route('adm.index')}}' cor='green' icone='ion ion-person'>
+                        Teste de conteúdo
+                    </caixa>
+                </div>
             </div>
         </painel>
     </pagina>
