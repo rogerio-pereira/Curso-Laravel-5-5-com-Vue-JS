@@ -21,11 +21,16 @@
             'nome',
             'titulo',
             'css',
-            'item'
+            'item',
+            'url'
         ],
         methods:{
             preencheFormulario:function(){
-                this.$store.commit('setItem', this.item);
+                axios.get(this.url+this.item.id).then(response => {
+                    //console.log(response.data);
+                    this.$store.commit('setItem', response.data);
+                });
+                //this.$store.commit('setItem', this.item);
             }
         }
     }

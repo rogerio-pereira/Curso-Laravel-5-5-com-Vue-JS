@@ -22,35 +22,34 @@
                 <tr v-for='(item, index) in lista'>
                     <td v-for='i in item'>{{i}}</td>
                     <td v-bind:id='detalhe || editar || deletar'>
-                        <form v-bind:id='index' v-if='deletar && token' v-bind:action='deletar' method=post>
+                        <form v-bind:id='index' v-if='deletar && token' v-bind:action='deletar + item.id' method=post>
                             <input type='hidden' name='_method' value='DELETE'>
                             <input type='hidden' name='_token' v-bind:value='token'>
 
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' v-bind:url='detalhe' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
 
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar |</a>
-                            <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar |' css=''></modallink>
+                            <modallink v-if='editar && modal' v-bind:item='item' v-bind:url='editar' tipo='link' nome='editar' titulo=' Editar |' css=''></modallink>
                             
                             <a v-on:click="executaForm(index)" v-bind:href='deletar'>Deletar</a>
                         </form>
 
                         <span v-if='!token'>
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' v-bind:url='detalhe' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
                             
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar |</a>
-                            <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar |' css=''></modallink>
+                            <modallink v-if='editar && modal' v-bind:item='item' v-bind:url='editar' tipo='link' nome='editar' titulo=' Editar' css=''></modallink>
                             
-                            <a v-on:click="executaForm(index)">Deletar</a>
                         </span>
 
                         <span v-if='token && !deletar'>
                             <a v-if="detalhe && !modal" v-bind:href='detalhe'>Detalhe |</a>
-                            <modallink v-if='detalhe && modal' v-bind:item='item' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
+                            <modallink v-if='detalhe && modal' v-bind:item='item' v-bind:url='detalhe' tipo='link' nome='detalhe' titulo='Detalhe |' css=''></modallink>
                             
                             <a v-if="editar && !modal" v-bind:href='editar'>Editar</a>
-                            <modallink v-if='editar && modal' v-bind:item='item' tipo='link' nome='editar' titulo=' Editar' css=''></modallink>
+                            <modallink v-if='editar && modal' v-bind:item='item' v-bind:url='editar' tipo='link' nome='editar' titulo=' Editar' css=''></modallink>
                         </span>
                     </td>
                 </tr>
@@ -95,6 +94,7 @@
         },
         computed:{
             lista:function(){
+                let lista = this.items.data;
                 let ordem = this.ordemAux;
                 let ordemCol = this.ordemAuxCol;
 
@@ -102,7 +102,7 @@
                 ordemCol = parseInt(ordemCol);
 
                 if(ordem == 'asc') {
-                    this.items.sort(function(a,b){
+                    lista.sort(function(a,b){
                         if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {return 1;}
                         if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {return -1;}
                             
@@ -110,7 +110,7 @@
                     });
                 }
                 else {
-                    this.items.sort(function(a,b){
+                    lista.sort(function(a,b){
                         if(Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {return 1;}
                         if(Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {return -1;}
                         
@@ -119,7 +119,7 @@
                 }
 
                 if(this.buscar) {
-                    return this.items.filter(res => {
+                    return lista.filter(res => {
                         res = Object.values(res);
                         for(let k=0; k<res.length; k++) {
                             if((res[k]+'').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0 ){
@@ -131,7 +131,7 @@
                     });
                 }
                 
-                return this.items;
+                return lista;
             }
         }
     }

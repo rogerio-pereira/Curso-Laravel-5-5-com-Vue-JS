@@ -19,17 +19,20 @@
             <migalhas v-bind:lista='{{$listaMigalhas}}'></migalhas>
 
             <tabela-lista 
-                v-bind:titulos="['#', 'Titulo', 'Descrição', 'Data']"
-                v-bind:items="{{$listaArtigos}}"
+                v-bind:titulos="['#', 'Titulo', 'Descrição', 'Autor', 'Data']"
+                v-bind:items="{{json_encode($listaArtigos)}}"
                 ordem='desc'
                 ordemCol=1
                 criar='#criar'
-                detalhe='#detalhe'
-                editar='#editar'
-                deletar='#deletar'
-                token='12456897452'
+                detalhe='/admin/artigos/'
+                editar='/admin/artigos/'
+                deletar='/admin/artigos/'
+                token='{{ csrf_token() }}'
                 modal='sim'
             ></tabela-lista>
+            <div align='center'>
+                {{$listaArtigos->render()}}
+            </div>
         </painel>
     </pagina>
 
@@ -58,7 +61,7 @@
         </span>
     </modal>
     <modal nome='editar' titulo='Editar'>
-        <formulario id='formEditar' css='' action='#' method='put' enctype='multipart/form-data' token='{{ csrf_token() }}'>
+        <formulario id='formEditar' css='' v-bind:action="'/admin/artigos/' + $store.state.item.id" method='put' enctype='' token='{{ csrf_token() }}'>
             <div class="form-group">
                 <label for="titulo">Título</label>
                 <input type="text" class="form-control" id='titulo' name='titulo' v-model='$store.state.item.titulo' placeholder='Título'>
@@ -66,6 +69,14 @@
             <div class="form-group">
                 <label for="descricao">Descrição</label>
                 <input type="text" class="form-control" id='descricao' name='descricao' v-model='$store.state.item.descricao' placeholder='Descrição'>
+            </div>
+            <div class="form-group">
+                <label for="conteudo">Conteúdo</label>
+                <textarea class="form-control" id='conteudo' name='conteudo' v-model='$store.state.item.conteudo' ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="datetime-local" class="form-control" id='data' name='data' v-model='$store.state.item.data' >
             </div>
         </formulario>
 
@@ -75,5 +86,6 @@
     </modal>
     <modal nome='detalhe' v-bind:titulo='$store.state.item.titulo'>
         <p>@{{$store.state.item.descricao}}</p>
+        <p>@{{$store.state.item.conteudo}}</p>
     </modal>
 @endsection

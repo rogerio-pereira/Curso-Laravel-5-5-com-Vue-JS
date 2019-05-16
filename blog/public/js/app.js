@@ -45409,7 +45409,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['titulos', 'items', 'ordem', 'ordemCol', 'criar', 'detalhe', 'editar', 'deletar', 'token', 'modal'],
@@ -45434,6 +45433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         lista: function lista() {
             var _this = this;
 
+            var lista = this.items.data;
             var ordem = this.ordemAux;
             var ordemCol = this.ordemAuxCol;
 
@@ -45441,7 +45441,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             ordemCol = parseInt(ordemCol);
 
             if (ordem == 'asc') {
-                this.items.sort(function (a, b) {
+                lista.sort(function (a, b) {
                     if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
                         return 1;
                     }
@@ -45452,7 +45452,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return 0;
                 });
             } else {
-                this.items.sort(function (a, b) {
+                lista.sort(function (a, b) {
                     if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
                         return 1;
                     }
@@ -45465,7 +45465,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             if (this.buscar) {
-                return this.items.filter(function (res) {
+                return lista.filter(function (res) {
                     res = Object.values(res);
                     for (var k = 0; k < res.length; k++) {
                         if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
@@ -45477,7 +45477,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
 
-            return this.items;
+            return lista;
         }
     }
 });
@@ -45593,7 +45593,7 @@ var render = function() {
                           {
                             attrs: {
                               id: index,
-                              action: _vm.deletar,
+                              action: _vm.deletar + item.id,
                               method: "post"
                             }
                           },
@@ -45621,6 +45621,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -45639,6 +45640,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.editar,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar |",
@@ -45678,6 +45680,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -45696,25 +45699,14 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.editar,
                                     tipo: "link",
                                     nome: "editar",
-                                    titulo: " Editar |",
+                                    titulo: " Editar",
                                     css: ""
                                   }
                                 })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    _vm.executaForm(index)
-                                  }
-                                }
-                              },
-                              [_vm._v("Deletar")]
-                            )
+                              : _vm._e()
                           ],
                           1
                         )
@@ -45734,6 +45726,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.detalhe,
                                     tipo: "link",
                                     nome: "detalhe",
                                     titulo: "Detalhe |",
@@ -45752,6 +45745,7 @@ var render = function() {
                               ? _c("modallink", {
                                   attrs: {
                                     item: item,
+                                    url: _vm.editar,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar",
@@ -46126,10 +46120,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tipo', 'nome', 'titulo', 'css', 'item'],
+    props: ['tipo', 'nome', 'titulo', 'css', 'item', 'url'],
     methods: {
         preencheFormulario: function preencheFormulario() {
-            this.$store.commit('setItem', this.item);
+            var _this = this;
+
+            axios.get(this.url + this.item.id).then(function (response) {
+                //console.log(response.data);
+                _this.$store.commit('setItem', response.data);
+            });
+            //this.$store.commit('setItem', this.item);
         }
     }
 });
