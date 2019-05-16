@@ -3,7 +3,7 @@
         <div class="thumbnail">
             <img v-bind:src="imagem" alt="...">
             <div class="caption">
-                <small>{{data}} - {{autor}}</small>
+                <small>{{data | formataData}} - {{autor}}</small>
 
                 <h3>{{titulo}}</h3>
 
@@ -30,6 +30,16 @@
             'autor',
             'sm',
             'md'
-        ]
+        ],
+        filters:{
+            formataData: function(valor){
+                if(!valor) 
+                    return '';
+                
+                valor = valor.toString();
+                valor = valor.split('-');
+                return valor[2]+'/'+valor[1]+'/'+valor['0'];
+            }
+        }
     }
 </script>

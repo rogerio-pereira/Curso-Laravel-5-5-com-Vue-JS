@@ -1382,7 +1382,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(74);
+module.exports = __webpack_require__(77);
 
 
 /***/ }),
@@ -1433,7 +1433,7 @@ Vue.component('migalhas', __webpack_require__(62));
 Vue.component('modal', __webpack_require__(65));
 Vue.component('modallink', __webpack_require__(68));
 Vue.component('formulario', __webpack_require__(71));
-Vue.component('artigocard', __webpack_require__(84));
+Vue.component('artigocard', __webpack_require__(74));
 
 var app = new Vue({
     el: '#app',
@@ -45430,6 +45430,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.ordemAux.toLowerCase() == 'asc') this.ordemAux = 'desc';else this.ordemAux = 'asc';
         }
     },
+    filters: {
+        formataData: function formataData(valor) {
+            if (!valor) return '';
+
+            valor = valor.toString();
+
+            if (valor.split('-').length == 3) {
+                valor = valor.split('-');
+                return valor[2] + '/' + valor[1] + '/' + valor['0'];
+            }
+
+            return valor;
+        }
+    },
     computed: {
         lista: function lista() {
             var _this = this;
@@ -45581,7 +45595,7 @@ var render = function() {
               "tr",
               [
                 _vm._l(item, function(i) {
-                  return _c("td", [_vm._v(_vm._s(i))])
+                  return _c("td", [_vm._v(_vm._s(_vm._f("formataData")(i)))])
                 }),
                 _vm._v(" "),
                 _c(
@@ -46398,29 +46412,14 @@ if (false) {
 
 /***/ }),
 /* 74 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(75)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(76)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46459,7 +46458,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46487,11 +46486,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['titulo', 'descricao', 'imagem', 'link', 'data', 'autor', 'sm', 'md']
+    props: ['titulo', 'descricao', 'imagem', 'link', 'data', 'autor', 'sm', 'md'],
+    filters: {
+        formataData: function formataData(valor) {
+            if (!valor) return '';
+
+            valor = valor.toString();
+            valor = valor.split('-');
+            return valor[2] + '/' + valor[1] + '/' + valor['0'];
+        }
+    }
 });
 
 /***/ }),
-/* 86 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46506,7 +46514,13 @@ var render = function() {
         _c("img", { attrs: { src: _vm.imagem, alt: "..." } }),
         _vm._v(" "),
         _c("div", { staticClass: "caption" }, [
-          _c("small", [_vm._v(_vm._s(_vm.data) + " - " + _vm._s(_vm.autor))]),
+          _c("small", [
+            _vm._v(
+              _vm._s(_vm._f("formataData")(_vm.data)) +
+                " - " +
+                _vm._s(_vm.autor)
+            )
+          ]),
           _vm._v(" "),
           _c("h3", [_vm._v(_vm._s(_vm.titulo))]),
           _vm._v(" "),
@@ -46540,6 +46554,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-691d5716", module.exports)
   }
 }
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
