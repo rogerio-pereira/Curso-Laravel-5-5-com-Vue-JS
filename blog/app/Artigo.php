@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 class Artigo extends Model
 {
@@ -42,7 +43,17 @@ class Artigo extends Model
      */
     public static function listaArtigos($paginate)
     {
-        $listaArtigos = self::select(['id', 'titulo', 'descricao', 'user_id', 'data'])->paginate($paginate);
+        $user = Auth::user();
+
+        if($user->admin == 'S')
+            $listaArtigos = self::select(['id', 'titulo', 'descricao', 'user_id', 'data'])
+                                ->orderBy('id', 'desc')
+                                ->paginate($paginate);
+        else
+            $listaArtigos = self::select(['id', 'titulo', 'descricao', 'user_id', 'data'])
+                                ->where('user_id', '=', $user->id)
+                                ->orderBy('id', 'desc')
+                                ->paginate($paginate);
 
         foreach($listaArtigos as $artigo) {
             $artigo->user_id = User::find($artigo->user_id)->name; //Mais rapido
