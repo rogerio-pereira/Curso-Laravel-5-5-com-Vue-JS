@@ -68,14 +68,29 @@ class Artigo extends Model
     /**
      * Retorna todos os artigos com usuários com data de publicação <= hoje
      */
-    public static function listaArtigosSite($paginate)
+    public static function listaArtigosSite($paginate, $busca = null)
     {
-        return DB::table('artigos')
+        if(isset($busca)) {
+            return DB::table('artigos')
                     ->join('users', 'users.id', '=', 'artigos.user_id')
                     ->select('artigos.id', 'artigos.titulo', 'artigos.descricao', 'users.name as autor', 'artigos.data')
                     ->whereNull('deleted_at')
                     ->whereDate('data', '<=', date('Y-m-d'))
+                    ->where(function($query) use($busca){
+                        $query->orWhere('titulo', 'like', '%'.$busca.'%')
+                            ->orWhere('descricao', 'like', '%'.$busca.'%');
+                    })
                     ->orderBy('data', 'DESC')
                     ->paginate($paginate);
+        }
+        else {
+            return DB::table('artigos')
+                        ->join('users', 'users.id', '=', 'artigos.user_id')
+                        ->select('artigos.id', 'artigos.titulo', 'artigos.descricao', 'users.name as autor', 'artigos.data')
+                        ->whereNull('deleted_at')
+                        ->whereDate('data', '<=', date('Y-m-d'))
+                        ->orderBy('data', 'DESC')
+                        ->paginate($paginate);
+        }
     }
 }
